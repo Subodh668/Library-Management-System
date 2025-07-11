@@ -1,15 +1,22 @@
 public class User {
+    private int userID;
     private String userName;
     private String contactNo;
 
 
-    public User( String userName, String contactNo) {
+
+    public User(int userID,String userName, String contactNo) {
+        this.userID = userID;
         this.userName = userName;
         this.contactNo = contactNo;
 
     }
 
     //getter methods
+    public int getUserID() {
+        return userID;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -19,6 +26,11 @@ public class User {
     }
 
     //setter methods
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
     public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
     }

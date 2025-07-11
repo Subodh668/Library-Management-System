@@ -1,13 +1,13 @@
 public class Book {
     //attributes ->book number, name, quantity, author
     //TODO create the attributes
-    private String bookNumber;
+    private int bookNumber;
     private String bookName;
     private String bookAuthor;
     private int bookQuantity;
 
     //constructor method
-    public Book(String bookNumber, String bookName, String bookAuthor, int bookQuantity){
+    public Book(int bookNumber, String bookName, String bookAuthor, int bookQuantity){
         this.bookNumber = bookNumber;
         this.bookName = bookName;
         this.bookAuthor = bookAuthor;
@@ -15,7 +15,7 @@ public class Book {
     }
 
     //getter methods
-    public String getBookNumber() {
+    public int getBookNumber() {
         return bookNumber;
     }
 
@@ -32,7 +32,7 @@ public class Book {
     }
 
     //setter methods
-    public void setBookNumber(String bookNumber) {
+    public void setBookNumber(int bookNumber) {
         this.bookNumber = bookNumber;
     }
 
