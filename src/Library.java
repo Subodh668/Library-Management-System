@@ -15,24 +15,6 @@ public class Library {
         Book book4 = new Book(4, "English", "Nuna Bears", 10);
         Book book5 = new Book(5, "Nepali", "Aman Malik", 10);
 
-//        try {
-//            Connection conn = DatabaseConnection.connect();
-//            String query = "INSERT INTO book(bookNumber, bookName, bookAuthor, bookQuantity) VALUES (?,?,?,?)";
-//            PreparedStatement ps = conn.prepareStatement(query);
-//            ps.setInt(1,book3.getBookNumber());
-//            ps.setString(2,book3.getBookName());
-//            ps.setString(3,book3.getBookAuthor());
-//            ps.setInt(4, book3.getBookQuantity());
-//            if(ps.executeUpdate() > 0){
-//                System.out.println("Book added to database");
-//            }else {
-//                System.out.println("Failed to add");
-//            }
-//
-//        } catch (SQLException | ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-
         //objects of user
         User user1 = new User(1,"Shila Acharya", "98066066066");
         User user2 = new User(2,"Purnima Timilsina", "98066066067");
@@ -40,13 +22,13 @@ public class Library {
         User user4 = new User(4,"Anjali Gurung", "98066066069");
         User user5 = new User(5,"Vineet Chaudhary", "98066066070");
 
+        //insert user
 //        try {
 //            Connection conn = DatabaseConnection.connect();
-//            String query = "INSERT INTO user(userId, userName, contactNo) VALUES (?,?,?)";
+//            String query = "INSERT INTO user(userName, contactNo) VALUES (?,?)";
 //            PreparedStatement ps = conn.prepareStatement(query);
-//            ps.setInt(1,user2.getUserID());
-//            ps.setString(2,user2.getUserName());
-//            ps.setString(3,user2.getContactNo());
+//            ps.setString(1,user2.getUserName());
+//            ps.setString(2,user2.getContactNo());
 //            if(ps.executeUpdate() > 0){
 //                System.out.println("user added to database");
 //            }else {
@@ -57,9 +39,6 @@ public class Library {
 //            throw new RuntimeException(e);
 //        }
 
-
-
-
         //TODO show available options\
         // show available books, borrow books, return book
         while(true) {
@@ -67,7 +46,10 @@ public class Library {
             System.out.println("Enter 1: Show available books");
             System.out.println("Enter 2: Borrow book");
             System.out.println("Enter 3: Return book");
-            System.out.println("Enter 4: Exit");
+            System.out.println("Enter 4: Entry book");
+            System.out.println("Enter 5: Update book Quantity");
+            System.out.println("Enter 6: Delete book");
+            System.out.println("Enter 7: Exit");
             System.out.println("Choose one option: ");
 
             int userChoice = scanner.nextInt();
@@ -85,7 +67,6 @@ public class Library {
 //                        String bookName = bookSet.getString("bookName");
 //                        String bookAuthor = bookSet.getString("bookAuthor");
 //                        int bookQuantity = bookSet.getInt("bookQuantity");
-
                         Book book = new Book(bookSet.getInt("bookNumber"), bookSet.getString("bookName"), bookSet.getString("bookAuthor"), bookSet.getInt("bookQuantity"));
                         bookList.add(book);
                     }
@@ -103,7 +84,76 @@ public class Library {
 
             } else if (userChoice == 3) {
                 System.out.println("\nWorking on returning books\n");
-            } else if (userChoice == 4) {
+            }else if (userChoice == 4){
+                System.out.println("Enter Book Number: ");
+                int bookNumber = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Enter Book Name: ");
+                String bookName = scanner.nextLine();
+                System.out.println("Enter Book Author: ");
+                String bookAuthor = scanner.nextLine();
+                System.out.println("Enter Book Quantity: ");
+                int bookQuantity = scanner.nextInt();
+
+                try {
+            Connection conn = DatabaseConnection.connect();
+            String query = "INSERT INTO book(bookNumber, bookName, bookAuthor, bookQuantity) VALUES (?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setInt(1,bookNumber);
+            ps.setString(2,bookName);
+            ps.setString(3,bookAuthor);
+            ps.setInt(4, bookQuantity);
+            if(ps.executeUpdate() > 0){
+                System.out.println("Book added to database");
+            }else {
+                System.out.println("Failed to add");
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+            }else if (userChoice == 5){
+                //Update record
+                System.out.println("Enter book id: ");
+                int bookNumber = scanner.nextInt();
+                System.out.println("Enter book quantity: ");
+                int bookQuantity = scanner.nextInt();
+                try {
+                    Connection conn = DatabaseConnection.connect();
+                    String query = "UPDATE book SET bookQuantity= ? WHERE bookNumber = ?";
+                    PreparedStatement ps = conn.prepareStatement(query);
+                    ps.setInt(1, bookQuantity);
+                    ps.setInt(2, bookNumber);
+                    if(ps.executeUpdate() > 0){
+                        System.out.println("Book updated");
+                    }else {
+                        System.out.println("Failed to update book");
+                    }
+
+                } catch (SQLException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }else if (userChoice == 6){
+                //Update record
+                System.out.println("Enter book id: ");
+                int bookNumber = scanner.nextInt();
+                try {
+                    Connection conn = DatabaseConnection.connect();
+                    String query = "DELETE FROM book WHERE bookNumber = ?";
+                    PreparedStatement ps = conn.prepareStatement(query);
+                    ps.setInt(1, bookNumber);
+                    if(ps.executeUpdate() > 0){
+                        System.out.println("Book deleted");
+                    }else {
+                        System.out.println("Failed to delete book");
+                    }
+
+                } catch (SQLException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }else if (userChoice == 7) {
                 System.out.println("\nExiting program, Thank you!\n");
                 break;
             }else {
@@ -111,12 +161,5 @@ public class Library {
             }
         }
 
-        //TODO create some books and users
-        //TODO need to figure out where to keep the boooks?
     }
-
-
-
-
-
 }
