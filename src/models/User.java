@@ -1,3 +1,5 @@
+package models;
+
 public class User {
     private int userID;
     private String userName;
@@ -52,7 +54,7 @@ public class User {
             book.decreaseQuantity();
             System.out.println(book+"borrowed by"+user);
         }else {
-            System.out.println("Book not available.");
+            System.out.println("models.Book not available.");
         }
         System.out.println("need to work on borrow book");
     }

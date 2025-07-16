@@ -1,3 +1,5 @@
+package models;
+
 public class Record {
     private User user;
     private Book book;

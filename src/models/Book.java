@@ -1,3 +1,5 @@
+package models;
+
 public class Book {
     //attributes ->book number, name, quantity, author
     //TODO create the attributes
