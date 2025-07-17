@@ -10,7 +10,12 @@ public class DeleteBookView {
         BookController bookController = new BookController();
         System.out.println("Enter book id: ");
         int bookNumber = scanner.nextInt();
-        bookController.deleteBook(bookNumber);
+        //get the update response from database and display output
+        if (bookController.deleteBook(bookNumber) > 0) {
+            System.out.println("models.Book deleted");
+        } else {
+            System.out.println("Failed to delete book");
+        }
 
     }
 }

@@ -18,6 +18,11 @@ public class AddBookView {
         System.out.println("Enter book Quantity: ");
         int bookQuantity = Integer.parseInt(scanner.nextLine());
         Book book  = new Book(bookNumber, bookName, bookAuthor, bookQuantity);
-        bookController.storeBook(book);
+        //get the update response from database and display output
+        if (bookController.storeBook(book) > 0) {
+            System.out.println("models.Book added to database");
+        } else {
+            System.out.println("Failed to add");
+        }
     }
 }

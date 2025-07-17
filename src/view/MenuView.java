@@ -41,7 +41,7 @@ public class MenuView {
                 System.out.println("\nExiting program, Thank you!\n");
                 break;
             }else {
-                System.out.println("\nInvalid choice, Please enter the valid choice from the given options\n");
+                System.out.println("\nInvalid choice, Please enter the valid choice from 1-7....Thank you!\n");
             }
         }
     }

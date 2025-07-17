@@ -2,26 +2,31 @@ package controller;
 import dao.BookDAO;
 import models.Book;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BookController {
-    public void storeBook(Book book){
-        BookDAO bookDAO = new BookDAO();
-        bookDAO.insertBook(book);
+    private final BookDAO bookDAO;
+    public BookController(){
+        try {
+            bookDAO = new BookDAO();
+        }catch (SQLException | ClassNotFoundException e){
+            throw new RuntimeException();
+        }
+    }
+    public int storeBook(Book book){
+        return bookDAO.insertBook(book);
     }
 
-    public void showAvailableBook(ArrayList<Book> bookList){
-        BookDAO bookDAO = new BookDAO();
-        bookDAO.showAvailableBookView(bookList);
+    public ArrayList<Book> showAvailableBook(ArrayList<Book> bookList){
+        return bookDAO.showAvailableBookView(bookList);
     }
 
-    public void updateBookQuantity(int bookNumber, int bookQuantity){
-        BookDAO bookDAO = new BookDAO();
-        bookDAO.updateBookQuantityView(bookNumber, bookQuantity);
+    public int updateBookQuantity(int bookNumber, int bookQuantity){
+        return bookDAO.updateBookQuantityView(bookNumber, bookQuantity);
     }
 
-    public void deleteBook(int bookNumber){
-        BookDAO bookDAO = new BookDAO();
-        bookDAO.deleteBookView(bookNumber);
+    public int deleteBook(int bookNumber){
+        return bookDAO.deleteBookView(bookNumber);
     }
 }

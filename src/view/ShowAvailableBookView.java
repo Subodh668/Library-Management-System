@@ -8,7 +8,12 @@ public class ShowAvailableBookView {
     public static void showAvailableBookView(){
         BookController bookController = new BookController();
         ArrayList<Book> bookList = new ArrayList<>();
-        bookController.showAvailableBook(bookList);
+        bookList = bookController.showAvailableBook(bookList);
+
+        //get the book details from database and display output
+        for (Book book : bookList) {
+            System.out.println("models.Book Number: " + book.getBookNumber() + " models.Book Name: " + book.getBookName() + "Author: " + book.getBookAuthor() + " Quantity: " + book.getBookQuantity());
+        }
 
     }
 
